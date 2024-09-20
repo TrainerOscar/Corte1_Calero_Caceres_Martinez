@@ -1,0 +1,54 @@
+package service;
+
+import model.Employee;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmployeeService implements EmployeeInterface {
+    private List<Employee> employeeList;
+
+    public EmployeeService() {
+        employeeList = new ArrayList<>();
+    }
+
+    @Override
+    public void addEmployee(Employee employee) {
+        employeeList.add(employee);
+    }
+
+    @Override
+    public Employee searchEmployeeById(String id) {
+        for (Employee employee : employeeList) {
+            if (employee.getId().equals(id)) {
+                return employee;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Employee> searchEmployeeByName(String name) {
+        List<Employee> found = new ArrayList<>();
+        for (Employee employee : employeeList) {
+            if (employee.getFirstName().equalsIgnoreCase(name)) {
+                found.add(employee);
+            }
+        }
+        return found;
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        return employeeList;
+    }
+
+    @Override
+    public void deleteEmployeeById(String id) {
+        employeeList.removeIf(employee -> employee.getId().equals(id));
+    }
+
+    @Override
+    public void updateEmployee(Employee employee) {
+        
+    }
+}
